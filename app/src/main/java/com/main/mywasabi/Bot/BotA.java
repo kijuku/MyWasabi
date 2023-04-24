@@ -5,9 +5,10 @@ public class BotA extends Bot{
 
     public BotA(String name) {
         super(name);
-        config = new Config(name,BotStyle.ANGRY);
-        answers = getAnswersFromFile("com/main/mywasabi/comment3.data");
-        comments = null;
+        this.name = name;
+        this.config = new Config(name,BotStyle.ANGRY);
+        this.answers = new Answer().getAns();
+        this.comments = new Comment().getAi();
 
     }
 

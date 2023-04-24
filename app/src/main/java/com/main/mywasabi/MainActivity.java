@@ -9,20 +9,59 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TableLayout;
+import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
+import com.main.mywasabi.Bot.Answer;
 import com.main.mywasabi.Bot.Bot;
 import com.main.mywasabi.Bot.BotA;
+import com.main.mywasabi.Bot.Comment;
+import com.main.mywasabi.Chat.Chat;
+import com.main.mywasabi.Chat.ConsoleColors;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
+    private Chat chatStorage;
+    private Context context;
     private Bot bot;
+
+    private RecyclerView recyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        bot = new BotA("Jarppi");
-        System.out.println(bot);
+        chatStorage = Chat.getInstance();
+        context = MainActivity.this;
 
+        chatStorage.generateBotArmy(5);
+
+        //System.out.println(chatStorage);
+
+        bot = new BotA("Jarppi");
+
+        Random rnd = new Random();
+        int low = 0;
+        int high = bot.getAnswers().size();
+        if (high > bot.getComments().size())
+            high = bot.getComments().size();
+
+        int pos = 0, pos1= 0, pos2 = 0;
+        for (int i = 0; i < 10 ; i++) {
+            pos = rnd.nextInt(high-low) + low;
+            pos1 = rnd.nextInt(high-low) + low;
+            pos2 = rnd.nextInt(high-low) + low;
+
+            System.out.println(chatStorage.getBots().get(0).getName()+": "+chatStorage.getBots().get(0).getAnswer(pos));
+            System.out.println(chatStorage.getBots().get(2).getName()+": "+chatStorage.getBots().get(2).getComment(pos1));
+            System.out.println(chatStorage.getBots().get(3).getName()+": "+chatStorage.getBots().get(3).getComment(pos2));
+        }
 
         TabLayout tabLayout = findViewById(R.id.tabArea);
         ViewPager2 fragmentArea = findViewById(R.id.fragmentArea);
@@ -55,6 +94,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+    public void createBotArmy(){
 
+    }
 
 }

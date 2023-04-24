@@ -28,27 +28,12 @@ public class Bot {
     public Bot(Object o) {
     }
 
-    public ArrayList<String> getAnswersFromFile(String fileName) {
-        ArrayList<String> answer = new ArrayList<String>();
-        File file = new File(fileName);
-        File file2 = new File("test.xsd");
-        System.out.println("Absolute Path: " + file2.getAbsolutePath());
-        System.out.println("Path: " + file2.getPath());
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(file));
-            String st;
-            while ((st = br.readLine()) != null){
-                System.out.println(st);
-                answer.add(st);
-            }
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return answer;
+    public String getComment(int position){
+        return this.getComments().get(position);
     }
-
+    public String getAnswer(int position){
+        return this.getAnswers().get(position);
+    }
     public String getName() {
         return name;
     }
