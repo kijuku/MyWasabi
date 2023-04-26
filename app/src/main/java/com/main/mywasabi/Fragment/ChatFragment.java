@@ -3,11 +3,16 @@ package com.main.mywasabi.Fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.tabs.TabLayout;
+import com.main.mywasabi.Chat.Chat;
 import com.main.mywasabi.R;
 
 /**
@@ -16,6 +21,8 @@ import com.main.mywasabi.R;
  * create an instance of this fragment.
  */
 public class ChatFragment extends Fragment {
+    private RecyclerView recyclerView;
+    private Chat chatStorage;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -60,7 +67,16 @@ public class ChatFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        chatStorage = Chat.getInstance();
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_chat, container, false);
+        View view = inflater.inflate(R.layout.fragment_chat, container, false);
+        TabLayout tabLayout = view.findViewById(R.id.tabArea);
+        ViewPager2 fragmentArea = view.findViewById(R.id.fragmentArea);
+
+        recyclerView = view.findViewById(R.id.ChatRecyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext().getApplicationContext() ));
+        recyclerView.setAdapter(new ChatListAdapter(view.getContext(), chatStorage.getMessageStorage().getMessages()));
+
+        return view;
     }
 }

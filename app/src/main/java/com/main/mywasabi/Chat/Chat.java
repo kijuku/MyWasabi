@@ -13,7 +13,9 @@ import java.util.Random;
 public class Chat {
     protected ArrayList<Bot> bots = new ArrayList<>();
     protected ArrayList<User> users = new ArrayList<>();
-    protected MessageList messageStorage = null;
+    protected MessageList messageStorage = MessageList.getInstance();
+
+    protected ArrayList<Message> messages = new ArrayList<>();
     private static Chat chatStorage = null;
 
     private Chat() {
@@ -52,6 +54,26 @@ public class Chat {
 
     public void setMessageStorage(MessageList messageStorage) {
         this.messageStorage = messageStorage;
+    }
+
+    public ArrayList<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(ArrayList<Message> messages) {
+        this.messages = messages;
+    }
+
+    public static Chat getChatStorage() {
+        return chatStorage;
+    }
+
+    public static void setChatStorage(Chat chatStorage) {
+        Chat.chatStorage = chatStorage;
+    }
+
+    public void addNewMessageToList(Message message){
+        Chat.chatStorage.getMessages().add(message);
     }
 
     public void generateBotArmy(int count){

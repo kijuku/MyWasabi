@@ -18,6 +18,7 @@ import com.main.mywasabi.Bot.BotA;
 import com.main.mywasabi.Bot.Comment;
 import com.main.mywasabi.Chat.Chat;
 import com.main.mywasabi.Chat.ConsoleColors;
+import com.main.mywasabi.Chat.Message;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -58,9 +59,20 @@ public class MainActivity extends AppCompatActivity {
             pos1 = rnd.nextInt(high-low) + low;
             pos2 = rnd.nextInt(high-low) + low;
 
+            chatStorage.addNewMessageToList
+                    (
+                    new Message(chatStorage.getBots().get(0).getName(),chatStorage.getBots().get(0).getAnswer(pos))
+            );
+            chatStorage.addNewMessageToList(
+                    new Message(chatStorage.getBots().get(1).getName(),chatStorage.getBots().get(1).getComment(pos1))
+            );
+            chatStorage.addNewMessageToList(
+                    new Message(chatStorage.getBots().get(2).getName(),chatStorage.getBots().get(2).getComment(pos2))
+            );
+
             System.out.println(chatStorage.getBots().get(0).getName()+": "+chatStorage.getBots().get(0).getAnswer(pos));
-            System.out.println(chatStorage.getBots().get(2).getName()+": "+chatStorage.getBots().get(2).getComment(pos1));
-            System.out.println(chatStorage.getBots().get(3).getName()+": "+chatStorage.getBots().get(3).getComment(pos2));
+            System.out.println(chatStorage.getBots().get(1).getName()+": "+chatStorage.getBots().get(1).getComment(pos1));
+            System.out.println(chatStorage.getBots().get(2).getName()+": "+chatStorage.getBots().get(2).getComment(pos2));
         }
 
         TabLayout tabLayout = findViewById(R.id.tabArea);

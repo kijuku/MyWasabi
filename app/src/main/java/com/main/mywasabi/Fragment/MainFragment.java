@@ -3,11 +3,15 @@ package com.main.mywasabi.Fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.tabs.TabLayout;
+import com.main.mywasabi.Chat.Chat;
 import com.main.mywasabi.R;
 
 /**
@@ -25,7 +29,8 @@ public class MainFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    private RecyclerView recyclerView;
+    private Chat noteStorage;
     public MainFragment() {
         // Required empty public constructor
     }
@@ -60,7 +65,14 @@ public class MainFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_main, container, false);
+
+        noteStorage = Chat.getInstance();
+        TabLayout tabLayout = view.findViewById(R.id.tabArea);
+        ViewPager2 fragmentArea = view.findViewById(R.id.fragmentArea);
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_main, container, false);
+        //return inflater.inflate(R.layout.fragment_main, container, false);
+        return view;
     }
 }

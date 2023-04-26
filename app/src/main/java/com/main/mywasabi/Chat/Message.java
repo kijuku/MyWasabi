@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class Message {
     protected int id;
+    protected String name;
     protected String message;
     protected Date timestamp;
     protected User user;
@@ -12,6 +13,10 @@ public class Message {
 
     }
 
+    public Message (String name, String message ){
+        this.name = name;
+        this.message = message;
+    }
     public Message(int id, String message) {
         this.id = id;
         this.message = message;
