@@ -16,6 +16,8 @@ public class Chat {
     protected MessageList messageStorage = MessageList.getInstance();
 
     protected ArrayList<Message> messages = new ArrayList<>();
+
+    protected ArrayList<Message> live = new ArrayList<>();
     private static Chat chatStorage = null;
 
     private Chat() {
@@ -34,6 +36,14 @@ public class Chat {
 
     public ArrayList<Bot> getBots() {
         return bots;
+    }
+
+    public ArrayList<Message> getLive() {
+        return live;
+    }
+
+    public void setLive(ArrayList<Message> live) {
+        this.live = live;
     }
 
     public void setBots(ArrayList<Bot> bots) {

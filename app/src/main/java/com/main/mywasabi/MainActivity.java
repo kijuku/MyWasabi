@@ -19,6 +19,7 @@ import com.main.mywasabi.Bot.Comment;
 import com.main.mywasabi.Chat.Chat;
 import com.main.mywasabi.Chat.ConsoleColors;
 import com.main.mywasabi.Chat.Message;
+import com.main.mywasabi.Chat.User;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -58,16 +59,24 @@ public class MainActivity extends AppCompatActivity {
             pos = rnd.nextInt(high-low) + low;
             pos1 = rnd.nextInt(high-low) + low;
             pos2 = rnd.nextInt(high-low) + low;
+            System.out.println("Positions: "+pos+ ", " +  pos1+ ", " + pos2);
 
             chatStorage.addNewMessageToList
                     (
-                    new Message(chatStorage.getBots().get(0).getName(),chatStorage.getBots().get(0).getAnswer(pos))
+                    new Message(0,
+                            chatStorage.getBots().get(0).getAnswer(pos),
+                            new User(chatStorage.getBots().get(0).getName())
+                    )
             );
             chatStorage.addNewMessageToList(
-                    new Message(chatStorage.getBots().get(1).getName(),chatStorage.getBots().get(1).getComment(pos1))
+                    new Message(1,chatStorage.getBots().get(1).getComment(pos1),
+                            new User(chatStorage.getBots().get(1).getName())
+                    )
             );
             chatStorage.addNewMessageToList(
-                    new Message(chatStorage.getBots().get(2).getName(),chatStorage.getBots().get(2).getComment(pos2))
+                    new Message(2,chatStorage.getBots().get(2).getComment(pos2),
+                    new User(chatStorage.getBots().get(2).getName())
+                 )
             );
 
             System.out.println(chatStorage.getBots().get(0).getName()+": "+chatStorage.getBots().get(0).getAnswer(pos));

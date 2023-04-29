@@ -6,6 +6,7 @@ public class Answer {
     protected ArrayList<String> ans = new ArrayList<>();
 
     public Answer() {
+        ans = new ArrayList<>();
         addAnswer();
     }
 
@@ -106,7 +107,8 @@ public class Answer {
         this.ans.add("Montako kertaa olet valehdellut äidillesi?");
         this.ans.add("Mikä on mielestäsi hyvä huijaus?");
         this.ans.add("Miksi luulet että intialaisten mielestä lehmä on pyhä eläin?");
-        this.ans.add("Mikä on mielestäsi ihmisen aisteista tärkein?94.Mikä on uskomattomin asia minkä ihminen on tehnyt?");
+        this.ans.add("Mikä on mielestäsi ihmisen aisteista tärkein?");
+        this.ans.add("Mikä on uskomattomin asia minkä ihminen on tehnyt?");
         this.ans.add("Määrittele,millainen on käpykylä");
         this.ans.add("Pyöreä vai kulmikas?");
         this.ans.add("Jos saisit Suomeen vierailijan ulkomailta,minkä paikan näyttäisit hänelle ensimmäisenä?");

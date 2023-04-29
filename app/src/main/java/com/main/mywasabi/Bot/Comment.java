@@ -6,6 +6,7 @@ public class Comment {
     protected ArrayList<String> ai = new ArrayList<>();
 
     public Comment(){
+        ai = new ArrayList<>();
         addComment();
     }
 

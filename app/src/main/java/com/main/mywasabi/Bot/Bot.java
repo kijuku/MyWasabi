@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Bot {
     protected String name;
@@ -16,6 +17,8 @@ public class Bot {
     public Bot(String name, Config config) {
         this.name = name;
         this.config = config;
+        answers = new ArrayList<>();
+        comments = new ArrayList<>();
     }
 
     public Bot(String name, ArrayList<String> answers, ArrayList<String> comments, Config config) {
@@ -29,10 +32,45 @@ public class Bot {
     }
 
     public String getComment(int position){
-        return this.getComments().get(position);
+        int testPos = position;
+        if (this.getComments()== null) return "<3 <3 :)";
+        if (testPos > this.getComments().size()) testPos = this.getComments().size();
+
+        return this.getComments().get(testPos);
     }
+
+    public String randomComment(){
+        Random rnd = new Random();
+        int low = 0;
+        int high = getComments().size();
+        if (high > getComments().size())  high = getComments().size();
+
+        int pos = rnd.nextInt(high-low) + low;
+
+        return this.getComments().get(pos);
+    }
+
+    public String randomAnswer(){
+        Random rnd = new Random();
+        int low = 0;
+
+        if (this.getAnswers()== null) return ":(";
+
+        int high = getAnswers().size();
+
+        if (high > getAnswers().size())  high = getAnswers().size();
+
+        int pos = rnd.nextInt(high-low) + low;
+
+        return this.getAnswers().get(pos);
+    }
+
     public String getAnswer(int position){
-        return this.getAnswers().get(position);
+        int testPos = position;
+        if (this.getAnswers()== null) return ":(";
+        if (testPos > this.getAnswers().size()) testPos = this.getAnswers().size();
+
+        return this.getAnswers().get(testPos);
     }
     public String getName() {
         return name;
