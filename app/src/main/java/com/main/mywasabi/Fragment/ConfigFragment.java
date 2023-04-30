@@ -7,7 +7,14 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.main.mywasabi.Chat.Chat;
 import com.main.mywasabi.R;
 
 /**
@@ -19,8 +26,16 @@ public class ConfigFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private Chat noteStorage;
+
+    private TextView txtUserName, txtUserDescription,  txtUserFavComment;
+    private RadioGroup txtUserColor;
+
+    private BotInfoAdapter botInfoAdapter;
+    private ImageButton btnSaveConfig;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -61,6 +76,33 @@ public class ConfigFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_config, container, false);
+        View view = inflater.inflate(R.layout.fragment_config, container, false);
+        noteStorage = Chat.getInstance();
+
+        txtUserName = view.findViewById(R.id.txtUserNameEdit);
+        txtUserColor = view.findViewById(R.id.rgColor);
+        txtUserFavComment = view.findViewById(R.id.txtFavComment);
+        btnSaveConfig = view.findViewById(R.id.btnSaveConfig);
+        txtUserDescription = view.findViewById(R.id.txtUserDescription);
+
+        txtUserName.setText((CharSequence) noteStorage.getUsers().get(0).getName());
+        txtUserFavComment.setText((CharSequence) noteStorage.getUsers().get(0).getFavoriteComment());
+        txtUserDescription.setText((CharSequence) noteStorage.getUsers().get(0).getDescription());
+        btnSaveConfig.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String userName = String.valueOf(txtUserName.getText());
+                String favComment = String.valueOf(txtUserFavComment.getText());
+                String userDesc = String.valueOf(txtUserDescription.getText());
+
+                if (!userName.isEmpty()) noteStorage.getUsers().get(0).setName(userName);
+                if (!favComment.isEmpty())noteStorage.getUsers().get(0).setFavoriteComment(favComment);
+                if (!userDesc.isEmpty())noteStorage.getUsers().get(0).setDescription(userDesc);
+
+                Toast toast = Toast.makeText(getContext(), "User config saved: " + userName + ", " + favComment, Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        });
+        return view;
     }
 }

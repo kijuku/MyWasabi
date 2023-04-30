@@ -1,13 +1,21 @@
 package com.main.mywasabi.Fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.google.android.material.tabs.TabLayout;
+import com.main.mywasabi.Chat.Chat;
 import com.main.mywasabi.R;
 
 /**
@@ -25,6 +33,12 @@ public class GroupFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private RecyclerView recyclerView;
+    private Chat noteStorage;
+    private ImageView imgBtnSend;
+
+    private TextView msgChat;
+    private BotInfoAdapter botInfoAdapter;
 
     public GroupFragment() {
         // Required empty public constructor
@@ -57,10 +71,29 @@ public class GroupFragment extends Fragment {
         }
     }
 
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_group, container, false);
+        View view = inflater.inflate(R.layout.fragment_group, container, false);
+
+        TabLayout tabLayout = view.findViewById(R.id.tabArea);
+        ViewPager2 fragmentArea = view.findViewById(R.id.fragmentArea);
+
+        noteStorage = Chat.getInstance();
+
+
+       // imgBtnSend = view.findViewById(R.id.imgBtnSend);
+       // msgChat = view.findViewById(R.id.msgChat);
+
+        recyclerView = view.findViewById(R.id.BotInfoRecyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext().getApplicationContext() ));
+        // recyclerView.setAdapter(new ChatListAdapter(view.getContext(), noteStorage.getMessages()));
+        botInfoAdapter = new BotInfoAdapter(view.getContext(),noteStorage.getBots());
+
+        recyclerView.setAdapter(botInfoAdapter);
+
+
+        return view;
     }
 }

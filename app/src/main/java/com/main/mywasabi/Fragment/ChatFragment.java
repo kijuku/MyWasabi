@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -103,7 +105,7 @@ public class ChatFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String str = String.valueOf(msgLiveChat.getText());
-                Message message = new Message("Me:", str);
+                Message message = new Message(chatStorage.getUsers().get(0).getName(), str);
                 chatStorage.getLive().add(message);
                 System.out.println(message);
 
@@ -112,10 +114,35 @@ public class ChatFragment extends Fragment {
                 chatAdapter.notifyDataSetChanged();
                 recyclerView.setAdapter(chatAdapter);
                 if (str.contains("?")) {
-                    addBotComment(view);
+                    Handler handler = new Handler(Looper.getMainLooper());
+                    Runnable end = () -> {
+                        addBotComment(view);
+                    };
+                    handler.postDelayed(end, 1400);
+
+                }
+                if (str.contains("!")){
+                    Handler handler = new Handler(Looper.getMainLooper());
+                    Runnable end = () -> {
+                        addBotCommentSup(view);
+                    };
+                    handler.postDelayed(end, 1400);
+
+                    Runnable end2 = () -> {
+                        addBotComment(view);
+                    };
+                    handler.postDelayed(end2, 1400);
                 } else {
-                    addBotAnswer(view);
-                    addBotComment(view);
+                    Handler handler = new Handler(Looper.getMainLooper());
+                    Runnable end = () -> {
+                        addBotAnswer(view);
+                    };
+                    handler.postDelayed(end, 1400);
+
+                    Runnable end2 = () -> {
+                        addBotComment(view);
+                    };
+                    handler.postDelayed(end2, 1400);
 
                 }
                 msgLiveChat.setText(" ");
@@ -129,8 +156,8 @@ public class ChatFragment extends Fragment {
       imgBtnSendEmoji.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String str = String.valueOf(":)");
-                Message message = new Message("Me", str);
+                String str = String.valueOf(chatStorage.getUsers().get(0).getFavoriteComment());
+                Message message = new Message(chatStorage.getUsers().get(0).getName(), str);
                 chatStorage.getLive().add(message);
                 System.out.println(message);
 
@@ -162,16 +189,17 @@ public class ChatFragment extends Fragment {
                 if (totalItemCount > 0 && endHasBeenReached) {
                     //you have reached to the bottom of your recycler view
                     System.out.println("+totalItemCount: " + totalItemCount);
-                    recyclerView.scrollToPosition(totalItemCount-1);
+                    //recyclerView.scrollToPosition(totalItemCount-1);
+                    recyclerView.smoothScrollToPosition(totalItemCount-1);
                 }
                 System.out.println("totalItemCount: " + totalItemCount);
 
             }
 
-            @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+    /*        @Override
+           public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-            }
+            }*/
         });
 
 
@@ -189,7 +217,39 @@ public class ChatFragment extends Fragment {
 
 
         String str = String.valueOf(chatStorage.getBots().get(botId).randomComment());
-        Message message = new Message(chatStorage.getBots().get(botId).getName(), str);
+        //Message message = new Message(chatStorage.getBots().get(botId).getName(), str);
+        int id = chatStorage.getLive().size();
+
+        Message message = new Message(id,  str,
+                chatStorage.getBots().get(botId).getBotUser(),
+                chatStorage.getBots().get(botId).getBotUser().getBackgroundColor());
+
+        chatStorage.getLive().add(message);
+        System.out.println(message);
+
+        chatAdapter.setNotes(chatStorage.getLive());
+
+        chatAdapter.notifyDataSetChanged();
+        recyclerView.setAdapter(chatAdapter);
+
+
+    }
+
+
+    public void addBotCommentSup(View view){
+        Random rnd = new Random();
+        chatStorage = Chat.getInstance();
+
+        int low = 0;
+        int botCount = chatStorage.getBots().size();
+        int botId = rnd.nextInt(botCount-low) + low;
+        int id = chatStorage.getLive().size();
+
+        String str = String.valueOf("OLETKO VIHAINEN?");
+        Message message = new Message(id,  str,
+                chatStorage.getBots().get(botId).getBotUser(),
+                chatStorage.getBots().get(botId).getBotUser().getBackgroundColor());
+
         chatStorage.getLive().add(message);
         System.out.println(message);
 
@@ -208,10 +268,14 @@ public class ChatFragment extends Fragment {
         int botCount = chatStorage.getBots().size();
         int botId = rnd.nextInt(botCount-low) + low;
 
-
-
         String str = String.valueOf(chatStorage.getBots().get(botId).randomAnswer());
-        Message message = new Message(chatStorage.getBots().get(botId).getName(), str);
+//        Message message = new Message(chatStorage.getBots().get(botId).getName(), str);
+        int id = chatStorage.getLive().size();
+
+        Message message = new Message(id,  str,
+                chatStorage.getBots().get(botId).getBotUser(),
+                chatStorage.getBots().get(botId).getBotUser().getBackgroundColor());
+
         chatStorage.getLive().add(message);
         System.out.println(message);
 

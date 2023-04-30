@@ -46,7 +46,7 @@ public class Message {
         this.user = user;
         this.backgroundColor = Color.parseColor("#CDDC39");
     }
-    public Message(int id, String message, User user,String colorStr) {
+    public Message(int id, String message, User user, String colorStr) {
         this.id = id;
         this.message = message;
         this.timestamp = new Date();

@@ -42,7 +42,10 @@ public class MainActivity extends AppCompatActivity {
         chatStorage = Chat.getInstance();
         context = MainActivity.this;
 
+        chatStorage.getUsers().add(new User("Me","Only one default user.","#fdd966",":)"));
+
         chatStorage.generateBotArmy(5);
+
 
         //System.out.println(chatStorage);
 
@@ -65,19 +68,13 @@ public class MainActivity extends AppCompatActivity {
                     (
                     new Message(0,
                             chatStorage.getBots().get(0).getAnswer(pos),
-                            new User(chatStorage.getBots().get(0).getName())
-                    )
-            );
+                            chatStorage.getBots().get(0).getBotUser()) );
             chatStorage.addNewMessageToList(
                     new Message(1,chatStorage.getBots().get(1).getComment(pos1),
-                            new User(chatStorage.getBots().get(1).getName())
-                    )
-            );
+                            chatStorage.getBots().get(1).getBotUser())  );
             chatStorage.addNewMessageToList(
                     new Message(2,chatStorage.getBots().get(2).getComment(pos2),
-                    new User(chatStorage.getBots().get(2).getName())
-                 )
-            );
+                            chatStorage.getBots().get(2).getBotUser()) );
 
             System.out.println(chatStorage.getBots().get(0).getName()+": "+chatStorage.getBots().get(0).getAnswer(pos));
             System.out.println(chatStorage.getBots().get(1).getName()+": "+chatStorage.getBots().get(1).getComment(pos1));

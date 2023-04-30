@@ -94,27 +94,41 @@ public class Chat {
             int result = 0;
             Bot bot;
             String names[] = {"Elkku","Inkku <3 <3","Jarppi","Morkkis :(","Aatto","Lissu"};
+            String backgroundColors[] = {"#ff7373","#01e2f6","#e9d9c0","#556d88","#ad95b9","#02febf"};
             for (int i = 0; i < count; i++) {
                 result = rnd.nextInt(high-low) + low;
                 String nameNow = names[i];
+                String bgColor = backgroundColors[i];
                 switch (result){
                     case 0:
-                        bot = new BotA(nameNow);
+                        bot = new BotA(nameNow,bgColor);
+                        bot.setBotUser(new User(nameNow,nameNow+" Bot",bgColor));
+                        users.add(bot.getBotUser());
                         break;
                     case 1:
-                        bot = new BotB(nameNow);
+                        bot = new BotB(nameNow,bgColor);
+                        bot.setBotUser(new User(nameNow,nameNow+" Bot",bgColor));
+                        users.add(bot.getBotUser());
                         break;
                     case 2:
-                        bot = new BotC(nameNow);
+                        bot = new BotC(nameNow,bgColor);
+                        bot.setBotUser(new User(nameNow,nameNow+" Bot",bgColor));
+                        users.add(bot.getBotUser());
                         break;
                     case 3:
-                        bot = new BotD(nameNow);
+                        bot = new BotD(nameNow,bgColor);
+                        bot.setBotUser(new User(nameNow,nameNow+" Bot",bgColor));
+                        users.add(bot.getBotUser());
                         break;
                     case 4:
-                        bot = new BotE(nameNow);
+                        bot = new BotE(nameNow,bgColor);
+                        bot.setBotUser(new User(nameNow,nameNow+" Bot",bgColor));
+                        users.add(bot.getBotUser());
                         break;
                     default:
-                        bot = new BotA(nameNow);
+                        bot = new BotA(nameNow,bgColor);
+                        bot.setBotUser(new User(nameNow,nameNow+" Bot",bgColor));
+                        users.add(bot.getBotUser());
                         break;
                 }
                 System.out.println("Lisättiin Botti: " + bot.getName());

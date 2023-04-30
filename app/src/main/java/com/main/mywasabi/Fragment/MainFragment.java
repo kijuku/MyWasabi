@@ -104,7 +104,8 @@ public class MainFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String str = String.valueOf(msgChat.getText());
-                Message message = new Message("Me:", str);
+                Message message = new Message(noteStorage.getUsers().get(0).getName(), str
+                        );
                 noteStorage.getMessages().add(message);
                 System.out.println(message);
 
@@ -124,19 +125,25 @@ public class MainFragment extends Fragment {
                 int totalItemCount = layoutManager.getItemCount();
                 int lastVisible = layoutManager.findLastVisibleItemPosition();
 
-                boolean endHasBeenReached = lastVisible + 5 >= totalItemCount;
+                boolean endHasBeenReached = lastVisible + 10 >= totalItemCount;
                 if (totalItemCount > 0 && endHasBeenReached) {
                     //you have reached to the bottom of your recycler view
                     System.out.println("totalItemCount: " + totalItemCount);
-                    recyclerView.scrollToPosition(noteStorage.getMessages().size()-1);
+                    recyclerView.smoothScrollToPosition(totalItemCount-1);
+                    recyclerView.canScrollVertically(1);
                 }
-            }
-
-            @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+              }
+       /* public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-            }
-        });
+                LinearLayoutManager layoutManager=LinearLayoutManager.class.cast(recyclerView.getLayoutManager());
+
+                if (!recyclerView.canScrollVertically(0)){
+                    layoutManager.setReverseLayout(false);
+                //layoutManager.canScrollVertically();
+                }
+            }*/
+        }
+        );
 
 
         return view;

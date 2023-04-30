@@ -1,5 +1,7 @@
 package com.main.mywasabi.Bot;
 
+import com.main.mywasabi.Chat.User;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -13,12 +15,14 @@ public class Bot {
     protected ArrayList<String>answers = new ArrayList<>();
     protected ArrayList<String>comments = new ArrayList<>();
     protected Config config;
+    protected User botUser;
 
     public Bot(String name, Config config) {
         this.name = name;
         this.config = config;
-        answers = new ArrayList<>();
-        comments = new ArrayList<>();
+        this.answers = new ArrayList<>();
+        this.comments = new ArrayList<>();
+        this.botUser = new User(name,name+" Bot");
     }
 
     public Bot(String name, ArrayList<String> answers, ArrayList<String> comments, Config config) {
@@ -26,9 +30,23 @@ public class Bot {
         this.answers = answers;
         this.comments = comments;
         this.config = config;
+        this.botUser = new User(name,name+" Bot");
+    }
+    public Bot(String name, Config config, String backgroundColor) {
+        this.name = name;
+        this.config = config;
+        this.botUser = new User(name,name+" Bot",backgroundColor);
     }
 
     public Bot(Object o) {
+    }
+
+    public User getBotUser() {
+        return botUser;
+    }
+
+    public void setBotUser(User botUser) {
+        this.botUser = botUser;
     }
 
     public String getComment(int position){
@@ -42,6 +60,7 @@ public class Bot {
     public String randomComment(){
         Random rnd = new Random();
         int low = 0;
+        if (this.getComments()== null) return "<3<3 xD xD";
         int high = getComments().size();
         if (high > getComments().size())  high = getComments().size();
 

@@ -1,18 +1,15 @@
 package com.main.mywasabi.Fragment;
 
-import android.content.ClipData;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.main.mywasabi.Bot.Bot;
 import com.main.mywasabi.Chat.Message;
-import com.main.mywasabi.Chat.MessageList;
 import com.main.mywasabi.R;
 
 import java.util.ArrayList;
@@ -58,28 +55,49 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ChatViewHolder holder, int position, @NonNull List<Object> payloads) {
         super.onBindViewHolder(holder, position, payloads);
-        LinearLayout linearLayout = holder.itemView.findViewById(R.id.msgBackground);
+      //  RecyclerView.LayoutParams linearLayout = holder.itemView.findViewById(R.id.msgBackground);
 
-        switch (notes.get(position).getId()) {
+        switch (notes.get(position).getUser().getId()) {
             case 0:
-                //notes.get(position).setBackgroundColor(Color.parseColor("#8BC34A"));
-                //holder.msgBackground.setBackgroundColor(notes.get(position).getBackgroundColor());
-                holder.txtSenderId.setTextColor(Color.parseColor("#000000"));
-                holder.txtSenderId.setText("" + notes.get(position).getUser().getName() + ": ");
+                holder.txtSenderMessage.setBackgroundColor(
+                        Color.parseColor(notes.get(position).getUser().getBackgroundColor() ));
+                holder.txtSenderId.setBackgroundColor(
+                        Color.parseColor(notes.get(position).getUser().getBackgroundColor() ));
+
+                holder.txtSenderId.setText("" + notes.get(position).getUser().getName() +
+                        ": [" + notes.get(position).getUser().getDescription() + "]");
                 holder.txtSenderMessage.setText((CharSequence) notes.get(position).getMessage());
             break;
             case 1:
-                holder.txtSenderId.setTextColor(Color.parseColor("#6633ff"));
-                holder.txtSenderId.setText("" + notes.get(position).getUser().getName() + ": ");
+                holder.txtSenderMessage.setBackgroundColor(
+                        Color.parseColor(notes.get(position).getUser().getBackgroundColor() ));
+                holder.txtSenderId.setBackgroundColor(
+                        Color.parseColor(notes.get(position).getUser().getBackgroundColor() ));
+
+                holder.txtSenderId.setText("" + notes.get(position).getUser().getName() +
+                        ":[" + notes.get(position).getUser().getDescription() + "]");
                 holder.txtSenderMessage.setText((CharSequence) notes.get(position).getMessage());
-                break;
+            break;
             case 2:
-                holder.txtSenderId.setTextColor(Color.parseColor("#660055"));
-                holder.txtSenderId.setText("" + notes.get(position).getUser().getName() + ": ");
+                holder.txtSenderMessage.setBackgroundColor(
+                        Color.parseColor(notes.get(position).getUser().getBackgroundColor() ));
+                holder.txtSenderId.setBackgroundColor(
+                        Color.parseColor(notes.get(position).getUser().getBackgroundColor() ));
+
+                holder.txtSenderId.setText("" + notes.get(position).getUser().getName() +
+                        ": [" + notes.get(position).getUser().getDescription() + "]");
                 holder.txtSenderMessage.setText((CharSequence) notes.get(position).getMessage());
-                break;
+            break;
             default:
-                break;
+                holder.txtSenderMessage.setBackgroundColor(
+                        Color.parseColor(notes.get(position).getUser().getBackgroundColor() ));
+                holder.txtSenderId.setBackgroundColor(
+                        Color.parseColor(notes.get(position).getUser().getBackgroundColor() ));
+
+                holder.txtSenderId.setText("" + notes.get(position).getUser().getName() +
+                        ": [" + notes.get(position).getUser().getDescription() + "]");
+                holder.txtSenderMessage.setText((CharSequence) notes.get(position).getMessage());
+            break;
         }
     }
 

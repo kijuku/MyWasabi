@@ -6,14 +6,14 @@
     android:layout_marginLeft="10dp"
     android:layout_marginTop="3dp"
     android:layout_marginRight="10dp"
-    android:background="#8BC34A"
     android:orientation="vertical">
 
 
     <TextView
         android:id="@+id/txtViewSenderId"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#E91E63"
         android:paddingLeft="10dp"
         android:paddingTop="10dp"
         android:paddingRight="10dp"
@@ -24,8 +24,9 @@
 
     <TextView
         android:id="@+id/txtSenderMessage"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#FF9800"
         android:paddingLeft="10dp"
         android:paddingTop="5dp"
         android:paddingRight="10dp"
@@ -33,4 +34,5 @@
         android:text="TextView"
         tools:layout_editor_absoluteX="228dp"
         tools:layout_editor_absoluteY="123dp" />
+
 </LinearLayout>

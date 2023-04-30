@@ -1,5 +1,6 @@
 package com.main.mywasabi.Fragment;
 
+import android.graphics.Color;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -9,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.main.mywasabi.R;
+
+import java.util.Random;
 
 public class ChatViewHolder extends RecyclerView.ViewHolder {
     public TextView txtSenderId, txtSenderMessage;
